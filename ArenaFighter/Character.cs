@@ -1,4 +1,5 @@
 ﻿using System;
+using static ArenaFighter.Dice;
 
 namespace ArenaFighter
 {
@@ -32,7 +33,7 @@ namespace ArenaFighter
                 Experience = 0;
             }
             else
-            { 
+            {
                 Health = randomNormal(op.Health - modl, op.Health + modh, true);
                 Strength = randomNormal(op.Strength - modl, op.Strength + modh, true);
                 Luck = randomNormal(op.Luck - modl, op.Luck + modh, true);
@@ -66,14 +67,7 @@ namespace ArenaFighter
             Name = name;
         }
 
-        public static int randomNormal(int min, int max, bool safe = false)
-        {
-            int r = Convert.ToInt32((random.NextDouble() + random.NextDouble()) / 2 * (max - min)) + min;
-            r = safe ? (r < 0 ? 1 : r) : r;
-            return r;
-        }
-
-        public string Name { get => name;  set => name = value; }
+        public string Name { get => name; set => name = value; }
         public int Health { get => stats.health; set => stats.health = value; }
         public int Strength { get => stats.strength; set => stats.strength = value; }
         public int Luck { get => stats.luck; set => stats.luck = value; }

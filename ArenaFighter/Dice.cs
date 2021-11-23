@@ -25,6 +25,13 @@ namespace ArenaFighter
             private set { sides = value; }
         }
 
+        public static int randomNormal(int min, int max, bool safe = false)
+        {
+            int r = Convert.ToInt32((random.NextDouble() + random.NextDouble()) / 2 * (max - min)) + min;
+            r = safe ? (r < 0 ? 1 : r) : r;
+            return r;
+        }
+
         private int sides;
         private static readonly Random random = new Random();
     }

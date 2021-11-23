@@ -1,11 +1,14 @@
 ﻿# Arena Fighter
-### Lexicon Test och Bedömning för kurs i Programmering .NET
+#### Lexicon Test och Bedömning för kurs i Programmering .NET
 ---
 Arena Fighter game
 
 v1.0
+
 Basic functionality
+
 v1.1
+
 Experience functionality
 
 
