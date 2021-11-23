@@ -25,6 +25,7 @@ namespace ArenaFighter
             if (player.IsAlive)
             {
                 player.Health = playerHealth;
+                player.Experience += 1;
                 return true;
             }
             return false;
@@ -41,8 +42,6 @@ namespace ArenaFighter
 
             log.add(header.ToString());
         }
-
-
 
         public Log getLog { get => log; }
 

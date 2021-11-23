@@ -29,12 +29,14 @@ namespace ArenaFighter
                 Health = randomNormal(10, 20, true);
                 Strength = randomNormal(3, 5, true);
                 Luck = randomNormal(1, 3, true);
+                Experience = 0;
             }
             else
             { 
                 Health = randomNormal(op.Health - modl, op.Health + modh, true);
                 Strength = randomNormal(op.Strength - modl, op.Strength + modh, true);
                 Luck = randomNormal(op.Luck - modl, op.Luck + modh, true);
+                Experience = 0;
             }
         }
 
@@ -75,7 +77,8 @@ namespace ArenaFighter
         public int Health { get => stats.health; set => stats.health = value; }
         public int Strength { get => stats.strength; set => stats.strength = value; }
         public int Luck { get => stats.luck; set => stats.luck = value; }
-        public bool IsAlive 
+        public int Experience { get => stats.experience; set => stats.experience = value; }
+        public bool IsAlive
         {
             get
             {
@@ -92,41 +95,7 @@ namespace ArenaFighter
             public int health;
             public int strength;
             public int luck;
+            public int experience;
         }
     }
 }
-
-/*
-        
-        [Weapons +strength]
-        Rock, s+1
-        Stick, s+2
-        Knife, s+4
-        Sword, s+6
-        Spear
-
-        [Armor +health]
-        Tunic, h+1
-        Thick clothes, h+3
-        Leather Armor, h+5
-        Chain maile, h+7
-        Plate armor, h+9
-        Wooden Shield, h+5
-        Wall shield, h+10
-
-
-
-        [Stats]
-        Speed, speed of character
-        Stamina, goes down during a fight
-        Victory points, upgrade stats, cost is what stat already is
-        
-        [Gold]
-        Buy stuff
-
-        [Magic]
-        Life Stone, back from the dead, loss of stats, loss of things.
-
-
-
-        */
