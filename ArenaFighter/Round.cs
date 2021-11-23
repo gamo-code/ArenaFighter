@@ -8,16 +8,16 @@ namespace ArenaFighter
         {
             int damage = att.Strength + Dice.Roll(att.Luck) - Dice.Roll(def.Luck);
             def.Health -= damage;
-            
-            logString.Clear().AppendFormat("{0} HITS {1} and does {2} damage => {1} has {3} health left.",
+
+            addLogString(ref log, 
+                "{0} HITS {1} and does {2} damage => {1} has {3} health left.",
                 att.Name, def.Name, damage, def.Health);
-            log.add(logString.ToString());
 
             if (def.Health < 1)
             {
-                logString.Clear().AppendFormat("{0} DEFEATED {1} after {2} rounds.",
-                    att.Name, def.Name, log.count - 1);
-                log.add(logString.ToString());
+                addLogString(ref log,
+                "{0} DEFEATED {1} after {2} rounds.",
+                att.Name, def.Name, log.count - 1);
                 return false;
             }
 
@@ -33,6 +33,10 @@ namespace ArenaFighter
             att = tmp;
         }
 
-        private static StringBuilder logString = new StringBuilder();
+        private static void addLogString(ref Log log, string format, params object[] args)
+        {
+            StringBuilder logString = new StringBuilder();
+            log.add(logString.AppendFormat(format, args).ToString());
+        }
     }
 }
