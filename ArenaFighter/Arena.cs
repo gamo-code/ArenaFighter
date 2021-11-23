@@ -2,7 +2,6 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using static System.Console;
 
 namespace ArenaFighter
 {
@@ -28,8 +27,7 @@ namespace ArenaFighter
             printHeaderClear("Arena Fighter - Main Menu\n");
             Console.Write(
                 "1) Fight\n" +
-                $"2) Experience ({player.Experience})\n" +
-                "3) Log\n" +
+                "2) Log\n" +
                 "0) Exit\n" +
                 "> "
             );
@@ -38,8 +36,7 @@ namespace ArenaFighter
             {
                 case "0": handleExit(); return false;
                 case "1": handleFight(); return true;
-                case "2": handleExperience(); return true;
-                case "3": handleLog(); return true;
+                case "2": handleLog(); return true;
                 default: return true;
             }
         }
@@ -62,29 +59,6 @@ namespace ArenaFighter
 
             battles.Last().getLog.printEntries();
             holdForInput("\n\tPress any key to return to main menu...");
-        }
-
-        private static void handleExperience()
-        {
-            printHeaderClear("Arena Fighter - Experience\n");
-
-            WriteLine("Upgrade a statisic");
-            Console.Write(
-                "1) Health\n" +
-                "2) Strength\n" +
-                "3) Luck\n" +
-                "0) Main menu\n" +
-                "> "
-            );
-
-            switch (Console.ReadLine())
-            {
-                case "0": break;
-                case "1": player.Health++; player.Experience--; break;
-                case "2": player.Strength++; player.Experience--; break;
-                case "3": player.Luck++; player.Experience--; break;
-                default: break;
-            }
         }
 
         private static void handleLog()
@@ -115,7 +89,6 @@ namespace ArenaFighter
                 battles[i].getLog.printResult();
             }
             Console.WriteLine("\n\tGoodBye, come back soon.");
-            
             holdForInput("\nPress any key to exit...");
 
             Environment.Exit(0);
