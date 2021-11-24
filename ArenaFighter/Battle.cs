@@ -1,5 +1,4 @@
-﻿using System.Text;
-using static ArenaFighter.Round;
+﻿using static ArenaFighter.Round;
 
 namespace ArenaFighter
 {
@@ -17,7 +16,7 @@ namespace ArenaFighter
         {
             int playerHealth = player.Health;
 
-            while (round(ref player, ref opponent, ref log));
+            while (round(ref player, ref opponent, ref log)) ;
 
             if (player.IsAlive)
             {

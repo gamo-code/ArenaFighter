@@ -1,5 +1,4 @@
-﻿using System;
-using static ArenaFighter.Dice;
+﻿using static ArenaFighter.Dice;
 
 namespace ArenaFighter
 {
@@ -22,8 +21,8 @@ namespace ArenaFighter
 
             int modl = spread - difficulty;
             int modh = spread + difficulty;
-            modl = modl < 0 ? 0 : modl;
-            modh = modh < 0 ? 0 : modh;
+            modl = modl < 0 ? 1 : modl;
+            modh = modh < 0 ? 1 : modh;
 
             if (op == null)
             {

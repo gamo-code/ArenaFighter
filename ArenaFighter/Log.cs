@@ -1,53 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
+using static System.Console;
 
 namespace ArenaFighter
 {
     public class Log
     {
-        public void add(string entry)
+        public void printLog()
         {
-            entries.Add(entry);
-        }
-
-        public void printEntries()
-        {
-            int i = 1;
-            Console.WriteLine("{0}", entries[0]);
-            for (; i < entries.Count - 1; i++)
-            {
-                Console.WriteLine("Round {0}: {1}", i, entries[i]);
-            }
-            Console.WriteLine("{0}", entries[i]);
+            WriteLine(header);
+            for (int i = 0; i < entries.Count; i++)
+                WriteLine("Round {0}: {1}", i + 1, entries[i]);
+            WriteLine(result);
         }
 
         public void printResult()
         {
-            Console.WriteLine(entries.Last());
+            WriteLine(result);
         }
 
         public void addLogString(string format, params object[] args)
         {
             StringBuilder logString = new StringBuilder();
-            add(logString.AppendFormat(format, args).ToString());
+            entries.Add(logString.AppendFormat(format, args).ToString());
         }
 
         public void addLogHeader(Character c1, Character c2)
         {
-            StringBuilder header = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
-            header.AppendFormat("{0,-15}  | {1}\n", c1.Name, c2.Name);
-            header.AppendFormat(" Health:   {0,4}  |  Health:   {1,4}\n", c1.Health, c2.Health);
-            header.AppendFormat(" Strength: {0,4}  |  Strength: {1,4}\n", c1.Strength, c2.Strength);
-            header.AppendFormat(" Luck:     {0,4}  |  Luck:     {1,4}", c1.Luck, c2.Luck);
+            sb.AppendFormat("{0,-15}  | {1}\n", c1.Name, c2.Name);
+            sb.AppendFormat(" Health:   {0,4}  |  Health:   {1,4}\n", c1.Health, c2.Health);
+            sb.AppendFormat(" Strength: {0,4}  |  Strength: {1,4}\n", c1.Strength, c2.Strength);
+            sb.AppendFormat(" Luck:     {0,4}  |  Luck:     {1,4}", c1.Luck, c2.Luck);
 
-            add(header.ToString());
+            header = sb.ToString();
+        }
+
+        public void addResult(string format, params object[] args)
+        {
+            StringBuilder logString = new StringBuilder();
+            result = logString.AppendFormat(format, args).ToString();
         }
 
         public int count { get => entries.Count; }
 
+        private string header = "";
+        private string result = "";
         private List<string> entries = new List<string>();
     }
 }

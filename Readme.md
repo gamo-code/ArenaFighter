@@ -39,6 +39,7 @@ Slots
 Stats
 * Speed, speed of character
 * Stamina, goes down during a fight
+* Defence, modifies oponent hit strength
 
 Money
 * Gold, buy/improve weapons/armor/items

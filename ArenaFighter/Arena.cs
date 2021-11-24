@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using static System.Console;
@@ -11,9 +10,9 @@ namespace ArenaFighter
         public static void Main(string[] args)
         {
             printHeaderClear("Arena Fighter - Wanna Fight?\n");
-            
-            Console.Write("Input your name\n> ");
-            player = new Character(Console.ReadLine());
+
+            Write("Input your name\n> ");
+            player = new Character(ReadLine());
             player.setStats(30, 7, 5);
 
             bool show = true;
@@ -26,15 +25,15 @@ namespace ArenaFighter
         private static bool MainMenu()
         {
             printHeaderClear("Arena Fighter - Main Menu\n");
-            Console.Write(
+            Write(
                 "1) Fight\n" +
-                $"2) Experience ({player.Experience})\n" +
+               $"2) Experience ({player.Experience})\n" +
                 "3) Log\n" +
                 "0) Exit\n" +
                 "> "
             );
 
-            switch (Console.ReadLine())
+            switch (ReadLine())
             {
                 case "0": handleExit(); return false;
                 case "1": handleFight(); return true;
@@ -53,14 +52,14 @@ namespace ArenaFighter
 
             if (!battles.Last().fight())
             {
-                battles.Last().getLog.printEntries();
+                battles.Last().getLog.printLog();
 
-                Console.WriteLine("\nYou where defeated!");
+                WriteLine("\nYou where defeated!");
                 holdForInput("\n\tPress any key to exit...");
                 handleExit();
             }
 
-            battles.Last().getLog.printEntries();
+            battles.Last().getLog.printLog();
             holdForInput("\n\tPress any key to return to main menu...");
         }
 
@@ -69,7 +68,7 @@ namespace ArenaFighter
             printHeaderClear("Arena Fighter - Experience\n");
 
             WriteLine("Upgrade a statisic");
-            Console.Write(
+            Write(
                 "1) Health\n" +
                 "2) Strength\n" +
                 "3) Luck\n" +
@@ -77,7 +76,7 @@ namespace ArenaFighter
                 "> "
             );
 
-            switch (Console.ReadLine())
+            switch (ReadLine())
             {
                 case "0": break;
                 case "1": player.Health++; player.Experience--; break;
@@ -93,8 +92,8 @@ namespace ArenaFighter
 
             for (int i = 0; i < battles.Count; i++)
             {
-                battles[i].getLog.printEntries();
-                Console.WriteLine("\n");
+                battles[i].getLog.printLog();
+                WriteLine("\n");
             }
 
             holdForInput("\n\tPress any key to return to main menu...");
@@ -104,49 +103,54 @@ namespace ArenaFighter
         {
             printHeaderClear("Arena Fighter - Exiting\n");
 
-            int fights = battles.Count;
-            int[] score = calculateScore();
+            int bc = battles.Count;
 
-            Console.WriteLine("You fought {0} rounds in {1} battles {3}, your score is {2}.\n", 
-                score[1], fights, score[0], player.IsAlive ? "undefeated" : "and lost");
-            Console.WriteLine("Battle Log:");
-            for (int i = 0; i < fights; i++)
+            int rounds, score;
+            calculateScore(out rounds, out score);
+
+            WriteLine("You fought {0} rounds in {1} battles {3}, your score is {2}.\n",
+                rounds, bc, score, player.IsAlive ? "undefeated" : "and lost");
+            WriteLine("Battle Log:");
+            for (int i = 0; i < bc; i++)
             {
                 battles[i].getLog.printResult();
             }
-            Console.WriteLine("\n\tGoodBye, come back soon.");
-            
+            WriteLine("\n\tGoodBye, come back soon.");
+
+            if (player.IsAlive)
+            {
+
+            }
             holdForInput("\nPress any key to exit...");
 
             Environment.Exit(0);
         }
 
-        private static int[] calculateScore()
+        private static void calculateScore(out int rounds, out int score)
         {
-            int[] score = new int[2];
+            rounds = 0;
+            score = 0;
             int bc = battles.Count;
 
             for (int i = 0; i < bc; i++)
-                score[1] += battles[i].getLog.count - 2;
+                rounds += battles[i].getLog.count;
 
             if (!player.IsAlive)
-                score[0] = score[1] - (battles.Last().getLog.count - 2);
+                score = rounds - battles.Last().getLog.count;
             else
-                score[0] = score[1] + bc;
-
-            return score;
+                score = rounds + bc;
         }
 
         private static void holdForInput(string msg)
         {
-            Console.WriteLine(msg);
-            Console.ReadKey();
+            WriteLine(msg);
+            ReadKey();
         }
 
         private static void printHeaderClear(string msg)
         {
-            Console.Clear();
-            Console.WriteLine(msg);
+            Clear();
+            WriteLine(msg);
         }
 
         private static Character player, opponent;
