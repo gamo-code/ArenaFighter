@@ -7,12 +7,6 @@ namespace ArenaFighter
 {
     public class Log
     {
-        public Log(Character c1, Character c2)
-        {
-            addLogHeadder(c1, c2);
-        }
-        public Log() { }
-
         public void add(string entry)
         {
             entries.Add(entry);
@@ -34,7 +28,13 @@ namespace ArenaFighter
             Console.WriteLine(entries.Last());
         }
 
-        public void addLogHeadder(Character c1, Character c2)
+        public void addLogString(string format, params object[] args)
+        {
+            StringBuilder logString = new StringBuilder();
+            add(logString.AppendFormat(format, args).ToString());
+        }
+
+        public void addLogHeader(Character c1, Character c2)
         {
             StringBuilder header = new StringBuilder();
 
@@ -43,10 +43,9 @@ namespace ArenaFighter
             header.AppendFormat(" Strength: {0,4}  |  Strength: {1,4}\n", c1.Strength, c2.Strength);
             header.AppendFormat(" Luck:     {0,4}  |  Luck:     {1,4}", c1.Luck, c2.Luck);
 
-            entries.Add(header.ToString());
+            add(header.ToString());
         }
 
-        public string this[int i] { get => entries[i]; }
         public int count { get => entries.Count; }
 
         private List<string> entries = new List<string>();
