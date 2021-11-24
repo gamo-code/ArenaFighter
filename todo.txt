@@ -1,0 +1,44 @@
+
+### TODO
+Functionality
+* PARTIAL : Implement more stats
+* DONE : Implement experience functionality
+* PARTIAL : Implement equipment functionality
+* DONE : Implement Weapons and armor
+* PARTIAL : Shops
+* DONE : Money
+* Do not reset health after battle, requires healing
+* Step through each round and allow use of items during fight
+* Choose opponent difficulty, low difficulty low revards and reversed
+    * Score based on difficulty
+* Save progress
+    * Automatically
+* Highscore
+* Change cost for stats and equipment with regards to level, higher level more expensive.
+
+---
+
+Weapons
+* Modifies strength
+
+Armor
+* Modifies health
+
+Slots
+* Allows to carry equipment
+
+Stats
+* Speed, speed of character
+* Stamina, goes down during a fight
+* Defence, modifies oponent hit strength
+
+Money
+* Gold, buy/improve weapons/armor/items
+
+Magic
+* Life item, back from the dead, loss of stats, loss of things.
+* Stat item, boosts stat
+* Experience item, gain exp faster
+* Money item, gain money item
+* Healing item, recover health
+

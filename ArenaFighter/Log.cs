@@ -32,7 +32,9 @@ namespace ArenaFighter
             sb.AppendFormat("{0,-15}  | {1}\n", c1.Name, c2.Name);
             sb.AppendFormat(" Health:   {0,4}  |  Health:   {1,4}\n", c1.Health, c2.Health);
             sb.AppendFormat(" Strength: {0,4}  |  Strength: {1,4}\n", c1.Strength, c2.Strength);
-            sb.AppendFormat(" Luck:     {0,4}  |  Luck:     {1,4}", c1.Luck, c2.Luck);
+            sb.AppendFormat(" Luck:     {0,4}  |  Luck:     {1,4}\n", c1.Luck, c2.Luck);
+            sb.AppendFormat(" Armor:    {0,4}  |  Armor:    {1,4}\n", c1.Armor, c2.Armor);
+            sb.AppendFormat(" Weapon:   {0,4}  |  Weapon:   {1,4}", c1.Weapon, c2.Weapon);
 
             header = sb.ToString();
         }

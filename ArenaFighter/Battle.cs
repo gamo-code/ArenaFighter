@@ -16,12 +16,15 @@ namespace ArenaFighter
         {
             int playerHealth = player.Health;
 
-            while (round(ref player, ref opponent, ref log)) ;
-
+            while (round(ref player, ref opponent, ref log)) { }
+            
             if (player.IsAlive)
             {
                 player.Health = playerHealth;
                 player.Experience += 1;
+                player.Gold += 1;
+                player.ExperienceTotal += 1;
+                player.GoldTotal += 1;
                 return true;
             }
             return false;

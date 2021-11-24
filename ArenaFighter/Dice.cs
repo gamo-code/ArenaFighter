@@ -28,7 +28,7 @@ namespace ArenaFighter
         public static int randomNormal(int min, int max, bool safe = false)
         {
             int r = Convert.ToInt32((random.NextDouble() + random.NextDouble()) / 2 * (max - min)) + min;
-            r = safe ? (r < 0 ? 1 : r) : r;
+            r = safe ? (r < 0 ? 0 : r) : r;
             return r;
         }
 

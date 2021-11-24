@@ -13,7 +13,7 @@ namespace ArenaFighter
 
             Write("Input your name\n> ");
             player = new Character(ReadLine());
-            player.setStats(30, 7, 5);
+            player.setStats(30, 7, 5, 0, 0);
 
             bool show = true;
             while (show)
@@ -28,7 +28,8 @@ namespace ArenaFighter
             Write(
                 "1) Fight\n" +
                $"2) Experience ({player.Experience})\n" +
-                "3) Log\n" +
+               $"3) Equipment ({player.Gold})\n" +
+                "4) Log\n" +
                 "0) Exit\n" +
                 "> "
             );
@@ -38,7 +39,8 @@ namespace ArenaFighter
                 case "0": handleExit(); return false;
                 case "1": handleFight(); return true;
                 case "2": handleExperience(); return true;
-                case "3": handleLog(); return true;
+                case "3": handleGold(); return true;
+                case "4": handleLog(); return true;
                 default: return true;
             }
         }
@@ -47,7 +49,7 @@ namespace ArenaFighter
         {
             printHeaderClear("Arena Fighter - Fight\n");
 
-            opponent = new Character(player, 4, -1);
+            opponent = new Character(player, 5, -2);
             battles.Add(new Battle(ref player, ref opponent));
 
             if (!battles.Last().fight())
@@ -67,6 +69,8 @@ namespace ArenaFighter
         {
             printHeaderClear("Arena Fighter - Experience\n");
 
+            WriteLine($"Experience to spend: {player.Experience}\n");
+
             WriteLine("Upgrade a statisic");
             Write(
                 "1) Health\n" +
@@ -82,6 +86,29 @@ namespace ArenaFighter
                 case "1": player.Health++; player.Experience--; break;
                 case "2": player.Strength++; player.Experience--; break;
                 case "3": player.Luck++; player.Experience--; break;
+                default: break;
+            }
+        }
+
+        private static void handleGold()
+        {
+            printHeaderClear("Arena Fighter - Equipment\n");
+
+            WriteLine($"Gold to spend: {player.Gold}\n");
+
+            WriteLine("Buy Equipment");
+            Write(
+                "1) Weapon\n" +
+                "2) Armor\n" +
+                "0) Main menu\n" +
+                "> "
+            );
+
+            switch (ReadLine())
+            {
+                case "0": break;
+                case "1": player.Weapon++; player.Gold--; break;
+                case "2": player.Armor++; player.Gold--; break;
                 default: break;
             }
         }
@@ -106,23 +133,19 @@ namespace ArenaFighter
             int bc = battles.Count;
 
             int rounds, score;
-            calculateScore(out rounds, out score);
+            calculateScore(out rounds, out score); // uuugh. C# need multiple returns and deconstruction
 
-            WriteLine("You fought {0} rounds in {1} battles {3}, your score is {2}.\n",
+            WriteLine("You fought {0} rounds in {1} battles {3}, your score is {2}.",
                 rounds, bc, score, player.IsAlive ? "undefeated" : "and lost");
-            WriteLine("Battle Log:");
-            for (int i = 0; i < bc; i++)
-            {
-                battles[i].getLog.printResult();
-            }
+
+            WriteLine("\nFinal stats:");
+            player.printStats();
+
+            WriteLine("\nBattles fought:");
+            printBattleResults();
+
             WriteLine("\n\tGoodBye, come back soon.");
-
-            if (player.IsAlive)
-            {
-
-            }
             holdForInput("\nPress any key to exit...");
-
             Environment.Exit(0);
         }
 
@@ -151,6 +174,16 @@ namespace ArenaFighter
         {
             Clear();
             WriteLine(msg);
+        }
+
+        private static void printBattleResults()
+        {
+            if (battles.Count > 0)
+            {
+                
+                foreach (Battle b in battles)
+                    b.getLog.printResult();
+            }
         }
 
         private static Character player, opponent;

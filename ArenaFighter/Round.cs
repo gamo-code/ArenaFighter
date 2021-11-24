@@ -9,8 +9,8 @@ namespace ArenaFighter
             if (log.count % 2 == 1)
                 swapCharacter(ref att, ref def);
 
-            int damage = att.Strength + Roll(att.Luck) - Roll(def.Luck);
-            def.Health -= damage;
+            int damage = att.Strength + att.Weapon + Roll(att.Luck) - def.Armor - Roll(def.Luck);
+            def.Health -= damage < 0 ? 0 : damage;
 
             log.addLogString("{0} HITS {1} and does {2} damage => {1} has {3} health left.",
                 att.Name, def.Name, damage, def.Health);

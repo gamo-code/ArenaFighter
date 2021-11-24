@@ -1,4 +1,5 @@
 ﻿using static ArenaFighter.Dice;
+using static System.Console;
 
 namespace ArenaFighter
 {
@@ -29,22 +30,30 @@ namespace ArenaFighter
                 Health = randomNormal(10, 20, true);
                 Strength = randomNormal(3, 5, true);
                 Luck = randomNormal(1, 3, true);
+                Armor = 0;
+                Weapon = 0;
                 Experience = 0;
+                Gold = 0;
             }
             else
             {
                 Health = randomNormal(op.Health - modl, op.Health + modh, true);
                 Strength = randomNormal(op.Strength - modl, op.Strength + modh, true);
                 Luck = randomNormal(op.Luck - modl, op.Luck + modh, true);
+                Armor = randomNormal(op.Armor - modl, op.Armor + modh, true);
+                Weapon = randomNormal(op.Weapon - modl, op.Weapon + modh, true);
                 Experience = 0;
+                Gold = 0;
             }
         }
 
-        public void setStats(int health, int strength, int luck)
+        public void setStats(int health, int strength, int luck, int weapon, int armor)
         {
             Health = (health < 0 ? Health : health);
             Strength = (strength < 0 ? Strength : strength);
             Luck = (luck < 0 ? Luck : luck);
+            Weapon = (weapon < 0 ? Luck : weapon);
+            Armor = (armor < 0 ? Luck : armor);
         }
 
         private void generateName(int nmin = 5, int nmax = 10)
@@ -66,11 +75,31 @@ namespace ArenaFighter
             Name = name;
         }
 
+        public void printStats()
+        {
+            WriteLine(
+                "Health: {0}\n" +
+                "Strength: {1}\n" +
+                "Luck: {2}\n" +
+                "Weapon: {3}\n" +
+                "Armor: {4}\n" +
+                "Gold: {5} (earned: {6})\n" +
+                "Experience: {7} (earned: {8})",
+                Health, Strength, Luck, Weapon, Armor,
+                Gold, GoldTotal, Experience, ExperienceTotal
+                );
+        }
+
         public string Name { get => name; set => name = value; }
         public int Health { get => stats.health; set => stats.health = value; }
         public int Strength { get => stats.strength; set => stats.strength = value; }
         public int Luck { get => stats.luck; set => stats.luck = value; }
         public int Experience { get => stats.experience; set => stats.experience = value; }
+        public int Gold { get => stats.gold; set => stats.gold = value; }
+        public int ExperienceTotal { get => stats.experienceTot; set => stats.experienceTot = value; }
+        public int GoldTotal { get => stats.goldTot; set => stats.goldTot = value; }
+        public int Armor { get => stats.armor; set => stats.armor = value; }
+        public int Weapon { get => stats.weapon; set => stats.weapon = value; }
         public bool IsAlive
         {
             get
@@ -87,7 +116,12 @@ namespace ArenaFighter
             public int health;
             public int strength;
             public int luck;
+            public int armor;
+            public int weapon;
             public int experience;
+            public int experienceTot;
+            public int gold;
+            public int goldTot;
         }
     }
 }
