@@ -1,10 +1,10 @@
 ﻿using System.Text;
+using static ArenaFighter.Round;
 
 namespace ArenaFighter
 {
     public class Battle
     {
-
         public Battle(ref Character player, ref Character opponent)
         {
             this.player = player;
@@ -17,10 +17,7 @@ namespace ArenaFighter
         {
             int playerHealth = player.Health;
 
-            while (Round.fight(ref player, ref opponent, ref log));
-
-            if ((log.count) % 2 == 0)
-                Round.swapCharacter(ref player, ref opponent);
+            while (round(ref player, ref opponent, ref log));
 
             if (player.IsAlive)
             {

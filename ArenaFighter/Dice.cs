@@ -33,6 +33,6 @@ namespace ArenaFighter
         }
 
         private int sides;
-        private static readonly Random random = new Random();
+        public static readonly Random random = new Random();
     }
 }

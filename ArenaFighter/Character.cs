@@ -82,7 +82,6 @@ namespace ArenaFighter
 
         private string name;
         private Stats stats;
-        private static readonly Random random = new Random();
 
         public struct Stats
         {
