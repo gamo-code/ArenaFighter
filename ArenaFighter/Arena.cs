@@ -9,6 +9,11 @@ namespace ArenaFighter
     {
         public static void Main(string[] args)
         {
+            run();
+        }
+
+        private static void run()
+        {
             printHeaderClear("Arena Fighter - Wanna Fight?\n");
 
             Write("Input your name\n> ");
@@ -144,8 +149,12 @@ namespace ArenaFighter
             WriteLine("\nBattles fought:");
             printBattleResults();
 
-            WriteLine("\n\tGoodBye, come back soon.");
-            holdForInput("\nPress any key to exit...");
+            WriteLine("\n\tPress R to restart or any key to exit.");
+            string restart = ReadKey().KeyChar.ToString();
+            WriteLine(restart);
+            if (restart == "r" || restart == "R")
+                run();
+
             Environment.Exit(0);
         }
 
@@ -164,10 +173,10 @@ namespace ArenaFighter
                 score = rounds + bc;
         }
 
-        private static void holdForInput(string msg)
+        private static string holdForInput(string msg)
         {
             WriteLine(msg);
-            ReadKey();
+            return ReadKey().ToString();
         }
 
         private static void printHeaderClear(string msg)
