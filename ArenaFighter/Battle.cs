@@ -1,4 +1,5 @@
 ﻿using static ArenaFighter.Round;
+using static ArenaFighter.Dice;
 
 namespace ArenaFighter
 {
@@ -15,16 +16,19 @@ namespace ArenaFighter
         public bool fight()
         {
             int playerHealth = player.Health;
+            int tmp;
 
             while (round(ref player, ref opponent, ref log)) { }
             
             if (player.IsAlive)
             {
                 player.Health = playerHealth;
-                player.Experience += 1;
-                player.Gold += 1;
-                player.ExperienceTotal += 1;
-                player.GoldTotal += 1;
+                tmp = Roll(2) - 1;
+                player.Experience += tmp;
+                player.ExperienceTotal += tmp;
+                tmp = Roll(2) - 1;
+                player.Gold += tmp;
+                player.GoldTotal += tmp;
                 return true;
             }
             return false;

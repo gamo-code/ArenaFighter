@@ -27,9 +27,9 @@ namespace ArenaFighter
 
             if (op == null)
             {
-                Health = randomNormal(10, 20, true);
-                Strength = randomNormal(3, 5, true);
-                Luck = randomNormal(1, 3, true);
+                Health = RandomNonUniform(10, 20, true);
+                Strength = RandomNonUniform(3, 5, true);
+                Luck = RandomNonUniform(1, 3, true);
                 Armor = 0;
                 Weapon = 0;
                 Experience = 0;
@@ -37,11 +37,11 @@ namespace ArenaFighter
             }
             else
             {
-                Health = randomNormal(op.Health - modl, op.Health + modh, true);
-                Strength = randomNormal(op.Strength - modl, op.Strength + modh, true);
-                Luck = randomNormal(op.Luck - modl, op.Luck + modh, true);
-                Armor = randomNormal(op.Armor - modl, op.Armor + modh, true);
-                Weapon = randomNormal(op.Weapon - modl, op.Weapon + modh, true);
+                Health = RandomNonUniform(op.Health - modl, op.Health + modh, true);
+                Strength = RandomNonUniform(op.Strength - modl, op.Strength + modh, true);
+                Luck = RandomNonUniform(op.Luck - modl, op.Luck + modh, true);
+                Armor = RandomNonUniform(op.Armor - modl, op.Armor + modh, true);
+                Weapon = RandomNonUniform(op.Weapon - modl, op.Weapon + modh, true);
                 Experience = 0;
                 Gold = 0;
             }

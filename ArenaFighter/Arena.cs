@@ -9,10 +9,10 @@ namespace ArenaFighter
     {
         public static void Main(string[] args)
         {
-            run();
+            Run();
         }
 
-        private static void run()
+        private static void Run()
         {
             printHeaderClear("Arena Fighter - Wanna Fight?\n");
 
@@ -153,7 +153,7 @@ namespace ArenaFighter
             string restart = ReadKey().KeyChar.ToString();
             WriteLine(restart);
             if (restart == "r" || restart == "R")
-                run();
+                Run();
 
             Environment.Exit(0);
         }
